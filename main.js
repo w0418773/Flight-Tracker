@@ -20,7 +20,7 @@
 
     GetJSON();
 
-    setInterval(GetJSON, 7000);
+    // setInterval(GetJSON, 7000);
 
     async function GetJSON() {
         let response = await fetch('https://opensky-network.org/api/states/all');
@@ -62,6 +62,7 @@
                     "properties": {
                         "name": flight.callsign,
                         "popupContent": "Flight Number: " + flight.callsign + "Grounded: " + flight.on_ground,
+                        "link": "https://www.flightaware.com/live/flight/" + flight.callsign,
                         "direction": flight.direction
                     },
                     "geometry": {
@@ -81,7 +82,7 @@
         // Add all markers to the map, create the popup content, and set and rotate the icon
         L.geoJson(geojson, {
             onEachFeature: function(feature, layer){
-                content = "<b>Flight Information:</b><br>" + feature.properties.popupContent; 
+                content = "<b>Flight Information:</b><br>" + feature.properties.popupContent + "<br>" + '<a href="' + feature.properties.link + '">More Information</a>'; 
                 layer.bindPopup(content);
                 layer.setIcon(planeIcon);
                 layer.setRotationAngle(feature.properties.direction)
