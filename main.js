@@ -80,9 +80,15 @@
         console.log(geojson);
 
         // Add all markers to the map, create the popup content, and set and rotate the icon
+        // POPUP CONTENT LAYOUT
+        // FlightInformation:
+        // Flight Number: CALLSIGN Grounded: BOOL
+        // More Information: LINK
+    
         L.geoJson(geojson, {
             onEachFeature: function(feature, layer){
-                content = "<b>Flight Information:</b><br>" + feature.properties.popupContent + "<br>" + '<a href="' + feature.properties.link + '">More Information</a>'; 
+                content = "<b>Flight Information:</b><br>" + feature.properties.popupContent + 
+                "<br>" + '<a href="' + feature.properties.link + '">More Information</a>'; 
                 layer.bindPopup(content);
                 layer.setIcon(planeIcon);
                 layer.setRotationAngle(feature.properties.direction)
