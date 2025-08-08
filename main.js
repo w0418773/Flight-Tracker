@@ -20,6 +20,7 @@
 
     GetJSON();
 
+    // Commented to remove system refresh, otherwise application would reach request limits
     // setInterval(GetJSON, 7000);
 
     async function GetJSON() {
